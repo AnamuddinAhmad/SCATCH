@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scatch</title>
+  <link rel="shortcut icon" href="/image/icons8-home-48.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <nav class="w-full fixed top-0 left-0 px-5 py-3 bg-white shadow-md z-10">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center">
+        <h3 class="text-3xl text-blue-900 font-bold">Scatch</h3>
+      </div>
+      <div class="hidden md:flex items-center space-x-3">
+        <% var logedin = typeof logedin !== "undefined" ? logedin : true %>
+        <% if(logedin){ %>
+          <a href="/shop" class="text-gray-700 hover:text-white hover:bg-blue-600 border border-blue-600 rounded-full px-3 transition duration-300">Shop</a>
+          <a href="/cart" class="text-gray-700 hover:text-white hover:bg-blue-600 border border-blue-600 rounded-full px-3 transition duration-300">Cart</a>
+          <a href="/users/profile" class="text-gray-700 hover:text-white hover:bg-blue-600 border border-blue-600 rounded-full px-3 transition duration-300"><%= user.fullname %></a>
+          <a href="/users/logout" class="text-gray-700 hover:text-white hover:bg-red-600 border-2 border-red-600 px-3 rounded-full transition duration-300">Logout</a>
+        <% } %>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-gray-700 focus:outline-none">
+          <i class="ri-menu-line ri-2x"></i>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden mt-3">
+      <a href="/shop" class="block py-2 text-gray-700 hover:text-blue-900 transition duration-300">Shop</a>
+      <a href="/cart" class="block py-2 text-gray-700 hover:text-blue-900 transition duration-300">Cart</a>
+      <a href="/users/profile" class="block py-2 text-gray-700 hover:text-blue-900 transition duration-300">My Account</a>
+      <a href="/users/logout" class="block py-2 text-gray-700 hover:text-blue-900 transition duration-300">Logout</a>
+    </div>
+  </nav>

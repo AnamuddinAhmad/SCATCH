@@ -1,0 +1,79 @@
+<%- include('./partials/header') %>
+
+<% if(success.length>0){ %>
+    <div class="fixed top-5 left-1/2 absolute z-10 transform -translate-x-1/2 px-3 py-2 rounded-md bg-blue-500">
+        <span class="text-white">
+            <%= success %>
+        </span>
+    </div>
+<% } %>
+
+<!-- Navbar Button for Mobile -->
+<!-- <div class="md:hidden px-5 py-3 flex justify-between items-center fixed top-20 left-0 w-full z-50">
+    <h3 class="text-lg font-semibold">Shop</h3>
+    <button id="nav-toggle" class="text-lg focus:outline-none flex items-center gap-2">
+        <i class="ri-menu-line"></i>
+
+    </button>
+</div> -->
+
+<div class="w-full min-h-screen flex flex-col md:flex-row items-start pt-16 md:pt-20 px-5 md:px-20 pb-10 md:pb-20">
+    <!-- Sidebar -->
+    <div id="sidebar" class="hidden md:flex w-full md:w-[25%] h-full flex-col items-start mb-10 md:mb-0 bg-white md:bg-transparent fixed md:static z-50 md:z-auto top-16 left-0 md:top-0 p-5 md:p-0">
+        <div class="flex items-center gap-2">
+            <h3>Sort by</h3>
+            <form action="/shop">
+                <select class="border-[1px] px-2 py-1" name="sortby" id="">
+                    <option value="popular">Popular</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </form>
+        </div>
+        <div class="flex flex-col mt-10 md:mt-20">
+            <a class="block w-fit mb-2" href="">New Collection</a>
+            <a class="block w-fit mb-2" href="">All Products</a>
+            <a class="block w-fit mb-2" href="">Discounted Products</a>
+        </div>
+        <div class="mt-16 md:mt-32">
+            <a class="block w-fit mb-2" href="">Filter by :</a>
+            <a class="block w-fit mb-2" href="">Availability</a>
+            <a class="block w-fit mb-2" href="">Discount</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="w-full md:w-[75%] flex flex-col gap-5 h-full pt-20 md:pt-0">
+        <div class="flex flex-wrap  items-start gap-5">
+            <% products.forEach(function(product){ %>
+                <div class="w-full rounded-md overflow-hidden sm:w-56">
+                    <div class="w-full h-52 flex items-center justify-center  bg-[<%= product.bgcolor %>]">
+                        <img class="h-[12rem]" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="<%= product.name %>">
+                    </div>
+                    <div class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]">
+                        <div>
+                            <h3 class="text-sm md:text-base">
+                                <%= product.name %>
+                            </h3>
+                        
+                            <h4 class="text-sm md:text-base flex gap-3">₹ <%= product.price %> <p class=" border border-[<%=product.textcolor%>] flex justify-center items-center bg-opacity-30  px-2 text-sm bg-[<%=product.panelcolor%>]-900 rounded-full">off <%=product.discount%></p></h4>
+                            
+                        </div>
+                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white text-black text-xl font-bold" href="/addtocart/<%=product._id%>">
+                            <i class="ri-add-line"></i>
+                        </a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>
+
+<script>
+    document.getElementById('nav-toggle').addEventListener('click', function() {
+        var sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('hidden');
+        sidebar.classList.toggle('flex');
+    });
+</script>
